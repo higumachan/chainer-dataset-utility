@@ -6,7 +6,6 @@ from chainer.dataset import DatasetMixin
 class ThroughMethodDatasetMixin(DatasetMixin):
     def __getattr__(self, item):
         def index_change(i):
-            print(self)
             parent_dataset, index = self._dataset_index_mapping(i)
             method = getattr(parent_dataset, item)
             if getattr(method, "_sample_wise_method_mark", False):
