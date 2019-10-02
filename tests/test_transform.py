@@ -1,5 +1,7 @@
 import pytest
 from chainer.dataset import DatasetMixin
+from chainer.datasets import ConcatenatedDataset
+
 
 from chainerds.dataset.through.tansform import ThroughMethodTransform
 from chainerds.dataset.through.through_method_dataset import sample_wise_method

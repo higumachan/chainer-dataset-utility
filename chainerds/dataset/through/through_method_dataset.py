@@ -4,22 +4,18 @@ from chainer.dataset import DatasetMixin
 
 
 class ThroughMethodDatasetMixin(DatasetMixin):
-    @property
-    def parent_dataset(self):
-        raise NotImplemented
-
     def __getattr__(self, item):
-        method = getattr(self.parent_dataset, item)
-
         def index_change(i):
-            return method(self._index_mapping(i))
+            print(self)
+            parent_dataset, index = self._dataset_index_mapping(i)
+            method = getattr(parent_dataset, item)
+            if getattr(method, "_sample_wise_method_mark", False):
+                return method(index)
+            raise ValueError("this method is not sample_wise_method")
+        return index_change
 
-        if getattr(method, "_sample_wise_method_mark", False):
-            return wraps(method)(index_change)
-        raise ValueError("this method is not sample_wise_method")
-
-    def _index_mapping(self, i):
-        return i
+    def _dataset_index_mapping(self, i):
+        raise NotImplementedError()
 
 
 def sample_wise_method(func):

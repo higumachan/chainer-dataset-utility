@@ -20,9 +20,9 @@ class ThroughMethodSubDataset(ThroughMethodDatasetMixin):
         return self._size
 
     def get_example(self, i):
-        return self._dataset[self._index_mapping(i)]
+        return self._dataset[self._dataset_index_mapping(i)[1]]
 
-    def _index_mapping(self, i):
+    def _dataset_index_mapping(self, i):
         if i >= 0:
             if i >= self._size:
                 raise IndexError('dataset index out of range')
@@ -34,8 +34,4 @@ class ThroughMethodSubDataset(ThroughMethodDatasetMixin):
 
         if self._order is not None:
             index = self._order[index]
-        return index
-
-    @property
-    def parent_dataset(self):
-        return self._dataset
+        return self._dataset, index
