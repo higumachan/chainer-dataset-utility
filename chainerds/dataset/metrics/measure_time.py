@@ -13,3 +13,6 @@ class MeasureTime(DatasetMixin):
 
         print(e - s)  # TODO(higumachan): ほんとはReporterに飛ばす
         return example
+
+    def __len__(self):
+        return len(self.super_dataset)
