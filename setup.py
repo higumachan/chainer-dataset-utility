@@ -1,5 +1,6 @@
 from distutils.core import setup
 
+from setuptools import find_packages
 
 setup(
     name='chainer-dataset-utility',
@@ -9,5 +10,5 @@ setup(
     author_email='yuta.hinokuma725@gmail.com',
     license='MIT',
     url='https://github.com/higumachan/chainer-dataset-utility',
-    packages=["chainerds"],
+    packages=find_packages(exclude=('tests')),
 )
