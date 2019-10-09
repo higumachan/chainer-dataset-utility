@@ -12,7 +12,7 @@ class MeasureTime(DatasetMixin):
         example = self.super_dataset.get_example(i)
         e = time.time()
 
-        print(self.name, e - s)  # TODO(higumachan): ほんとはReporterに飛ばす
+        print(self.name, i, e - s)  # TODO(higumachan): ほんとはReporterに飛ばす
         return example
 
     def __len__(self):
